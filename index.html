@@ -63,11 +63,22 @@
       let result = document.querySelector("#borderbox>span");
       let box = document.getElementById("borderbox");
       let math = document.getElementById("math");
-
+      let parse1 = parseInt(input1.value);
+      let parse2 = parseInt(input2.value);
       button.addEventListener("click", click);
 
       function click() {
-        if (input1.value.length != 0 && input2.value.length != 0) {
+        if (input1.value.length == 0 && input2.value.length == 0) {
+          toastr["error"]("Please fill in both fields");
+        } else if (math.value == "/" && input2.value == 0) {
+          toastr["error"]("You can't divide by 0");
+        } else if (math.value == "-" && input2.value > input1.value) {
+          toastr["error"]("You can't subtract a number from a smaller number");
+          // } else if ( % 1 === 0) {
+          //   toastr["error"]("You can't divide by a number if the result would not be an integer");
+        } else if (math.value == "*" && input2.value % 2 == 0) {
+          toastr["error"]("You can't multiply by odd numbers");
+        } else {
           button.classList.remove("btn-primary");
           button.classList.add("btn-success");
           button.innerText = "Calculating...";
@@ -76,8 +87,6 @@
             '<i class="fas fa-spin fa-spinner"></i>  '
           );
           setTimeout(unclick, 500);
-        } else {
-          toastr["error"]("Please fill in both fields");
         }
       }
 
@@ -87,8 +96,7 @@
         button.innerHTML = "Calculate!";
         let parse1 = parseInt(input1.value);
         let parse2 = parseInt(input2.value);
-
-        result.innerHTML = eval("parse1 + math.value + parse2");
+        result.innerHTML = eval(parse1 + math.value + parse2);
       }
     </script>
   </body>

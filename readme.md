@@ -24,11 +24,11 @@ Here are the instructions:
 - [x] 20. Now remove that code and add the `required` attribute to the input html tags, compare both results
 - [x] 21. Add a select element in between the input fields (so it's input, select, input and then button below these)
 - [x] 22. The select value should have all operators as options
-- [ ] 23. Now when you click the button, it should calculate the operation (add when + is selected, remove when - is selected, ...)
-- [ ] 24. Catch the following error: `You can't divide by 0`
-- [ ] 25. Catch the following error: `You can't subtract a number from a smaller number (5-23)`
+- [x] 23. Now when you click the button, it should calculate the operation (add when + is selected, remove when - is selected, ...)
+- [x] 24. Catch the following error: `You can't divide by 0`
+- [x] 25. Catch the following error: `You can't subtract a number from a smaller number (5-23)`
 - [ ] 26. Catch the following error: `You can't divide by a number if the result would not be an integer`
-- [ ] 27. Catch the following error: `You can't multiply by odd numbers`
+- [x] 27. Catch the following error: `You can't multiply by odd numbers`
 - [ ] 28. If the text `rand` is entered instead of a number, then on key up change that text to a random number (integer) between 0-100
 - [ ] 29. Catch the following error: `You can't do any operations if the content is anything but a number`
 - [ ] 30. If you type `Boom!` in any of the input fields, the entire page content (separately) falls down out of the page and you are left with a blank page

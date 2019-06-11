@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fix me!</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+    />
+    <link rel="stylesheet" href="stylesheet.css" />
+  </head>
+  <body class="bg-dark pt-4">
+    <div id="exercisesHolder" class="container">
+      <div class="row">
+        <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4 border">
+          <input id="input1" type="text" placeholder="type here" required />
+          <select name="do math" id="math">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+          </select>
+          <input id="input2" type="text" placeholder="type here" required />
+          <br />
+
+          <button class="btn btn-primary">Calculate!</button>
+          <div id="borderbox">
+            here is your result: <span id="result"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+    <script>
+      let button = document.querySelector("#exercisesHolder>div>div>button");
+      let input1 = document.getElementById("input1");
+      let input2 = document.getElementById("input2");
+      let result = document.querySelector("#borderbox>span");
+      let box = document.getElementById("borderbox");
+      let math = document.getElementById("math");
+
+      button.addEventListener("click", click);
+
+      function click() {
+        if (input1.value.length != 0 && input2.value.length != 0) {
+          button.classList.remove("btn-primary");
+          button.classList.add("btn-success");
+          button.innerText = "Calculating...";
+          button.insertAdjacentHTML(
+            "afterbegin",
+            '<i class="fas fa-spin fa-spinner"></i>  '
+          );
+          setTimeout(unclick, 500);
+        } else {
+          toastr["error"]("Please fill in both fields");
+        }
+      }
+
+      function unclick() {
+        button.classList.add("btn-primary");
+        button.classList.remove("btn-success");
+        button.innerHTML = "Calculate!";
+        let parse1 = parseInt(input1.value);
+        let parse2 = parseInt(input2.value);
+
+        result.innerHTML = eval("parse1 + math.value + parse2");
+      }
+    </script>
+  </body>
+</html>

@@ -39,10 +39,16 @@
   padding: 0.5em;
   vertical-align: middle;
   letter-spacing: 0.5px;
+  position: relative;
+}
+#math {
+  position: relative;
 }
 input {
   padding: 0.5em;
+  position: relative;
 }
 button {
   margin: 10px;
+  position: relative;
 }

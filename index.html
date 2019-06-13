@@ -63,21 +63,30 @@
       let result = document.querySelector("#borderbox>span");
       let box = document.getElementById("borderbox");
       let math = document.getElementById("math");
-      let parse1 = parseInt(input1.value);
-      let parse2 = parseInt(input2.value);
+      let random = Math.floor(Math.random() * 101);
       button.addEventListener("click", click);
 
       function click() {
-        if (input1.value.length == 0 && input2.value.length == 0) {
+        let check1 = isNaN(input1.value);
+        let check2 = isNaN(input2.value);
+        if (input1.value == "Boom!" || input2.value == "Boom!") {
+          boom();
+        } else if (input1.value.length == 0 && input2.value.length == 0) {
           toastr["error"]("Please fill in both fields");
         } else if (math.value == "/" && input2.value == 0) {
           toastr["error"]("You can't divide by 0");
         } else if (math.value == "-" && input2.value > input1.value) {
           toastr["error"]("You can't subtract a number from a smaller number");
-          // } else if ( % 1 === 0) {
-          //   toastr["error"]("You can't divide by a number if the result would not be an integer");
         } else if (math.value == "*" && input2.value % 2 == 0) {
           toastr["error"]("You can't multiply by odd numbers");
+        } else if (check1 === true || check2 === true) {
+          toastr["error"](
+            "You can't do any operations if the content is anything but a number"
+          );
+        } else if (input2.value == "rand") {
+          input2.value = random;
+        } else if (input2.value == "rand") {
+          input2.value = random;
         } else {
           button.classList.remove("btn-primary");
           button.classList.add("btn-success");
@@ -91,12 +100,39 @@
       }
 
       function unclick() {
+        let parse1 = parseInt(input1.value);
+        let parse2 = parseInt(input2.value);
+        let calc = eval(parse1 + math.value + parse2);
+        let calcinteger = Number.isInteger(calc);
+        if (math.value == "/" && calcinteger === false) {
+          toastr["error"](
+            "You can't divide by a number if the result would not be an integer"
+          );
+        } else {
+          result.innerHTML = calc;
+        }
         button.classList.add("btn-primary");
         button.classList.remove("btn-success");
         button.innerHTML = "Calculate!";
-        let parse1 = parseInt(input1.value);
-        let parse2 = parseInt(input2.value);
-        result.innerHTML = eval(parse1 + math.value + parse2);
+      }
+
+      function boom() {
+        let randtiming = Math.floor(Math.random() * 5001);
+        setTimeout(fall(input1), randtiming);
+        setTimeout(fall(input2), randtiming);
+        setTimeout(fall(math), randtiming);
+        setTimeout(fall(button), randtiming);
+        setTimeout(fall(box), randtiming);
+      }
+      function fall(obj) {
+        let randspeed = 1 + Math.floor(Math.random() * 11);
+        let fall = obj.offsetTop;
+        console.log(obj);
+        console.log(fall);
+        setInterval(function() {
+          fall += randspeed;
+          obj.style.top = fall + "px";
+        }, 5);
       }
     </script>
   </body>
